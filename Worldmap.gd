@@ -8,6 +8,11 @@ func _process(delta):
 	emit_signal("mouse_position", mpos)
 
 
+func getEntityCoord(entity):
+	return $TileMap.world_to_map(entity)
+	
+
+
 func moveEntityToCoord(entity, coordmap):
 	print($TileMap.get_cell(coordmap.x, coordmap.y))
 	

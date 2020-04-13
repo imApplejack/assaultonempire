@@ -18,40 +18,16 @@ func _ready():
 
 
 func _process(delta):
-	if(states[currentState].isRunning()):
-		states[currentState]._process(delta)
-	else:
-		if(currentState == 1):
-			currentState = 0
-		else:
-			currentState = 1
-		states[currentState].running = true
+	states[currentState].process(delta)
 
-
-
-
-
-#State tours joueur
-#func processPlayerTurn():
-#	if(not initState):
-#		initPlayerTurn()
-#	$Ui/Debug/ActionToDo.text = 'Fais bouger ' + $Worldmap/Personnage.characterName
-#	#fin du state
-#	if($Worldmap/Personnage.actionDone == 0):
-#		currentState = ENNEMY_TURN
-#		initState = false
-#func initPlayerTurn():
-#	$Worldmap/Personnage.actionDone = 2 #todo foreach les personnages
-#	initState = true
-#
-##State tour ennemis
-#func processEnnemyTurn():
-#	if(not initState):
-#		initPlayerTurn()
-#	print('tour des mechants')
-#	currentState = PLAYER_TURN
-#	initState = false
-#
-#func initEnnemyTurn():
-#	initState = true
+func _input(event):
+	states[currentState].input(event)
 	
+
+
+func _on_StatePlayer_state_player_end():
+	currentState = 1
+
+
+func _on_StateEnemy_state_enemy_end():
+	currentState = 0
